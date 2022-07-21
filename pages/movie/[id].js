@@ -1,4 +1,4 @@
-import { getSession, useSession } from "next-auth/client";
+import { getSession, useSession } from "next-auth/react";
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -12,14 +12,14 @@ import ReactPlayer from "react-player/lazy";
 
 
 export default function Movie({ result }) {
-    const [session] = useSession();
+    const {data: session, status} = useSession();
     const BASE_URL = "https://image.tmdb.org/t/p/original/";
     const router = useRouter();
     const [showPlayer, setShowPlayer] = useState(false);
 
     useEffect(() => {
-        if (!session) {
-        router.push("/");
+        if (status === "authenticated") {
+            router.push("/");
         }
     }, []);
 

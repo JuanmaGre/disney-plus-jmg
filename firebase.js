@@ -1,5 +1,5 @@
+import { FirestoreAdapter } from '@next-auth/firebase-adapter';
 import { initializeApp, getApp, getApps } from 'firebase/app'
-import { getFirestore } from 'firebase/firestore'
 import { getStorage } from 'firebase/storage'
 
 
@@ -14,7 +14,7 @@ const firebaseConfig = {
 };
 
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp()
-const db = getFirestore()
+const db = FirestoreAdapter(firebaseConfig)
 const storage = getStorage()
 
 

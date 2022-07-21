@@ -5,15 +5,16 @@ import {
     PlusIcon,
     StarIcon,
 } from "@heroicons/react/solid";
-import { signIn, signOut, useSession } from "next-auth/client";
+import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
 
 
 export default function Header() {
-    const [session] = useSession();
+    const {data: session, status} = useSession();
     const router = useRouter();
 
+    if (status === "unauthenticated") {
     return (
         <header className="sticky bg-[#040714] top-0 z-[1000] flex items-center px-10 md:px-12 h-[72px]">
             <Image
@@ -79,5 +80,5 @@ export default function Header() {
                 />
             )}
         </header>
-    );
+    )};
 };

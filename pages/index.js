@@ -1,4 +1,4 @@
-import { getSession, useSession } from "next-auth/client";
+import { getSession, useSession } from "next-auth/react";
 import Head from "next/head";
 import Brands from "../components/Brands";
 import MoviesCollection from "../components/MoviesCollection";
@@ -16,7 +16,7 @@ export default function Home({
     top_ratedMovies,
     top_ratedShows,
 }) {
-    const [session] = useSession();
+    const {data: session, status} = useSession();
 
     return (
         <div>
@@ -28,7 +28,7 @@ export default function Home({
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Header />
-            {!session ? (
+            {status === "authenticated" ? (
                 <Hero />
             ) : (
                 <main className="relative min-h-screen after:bg-home after:bg-center after:bg-cover 
